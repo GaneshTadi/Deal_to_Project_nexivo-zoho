@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   
+    <link rel ="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+<script src="https://live.zwidgets.com/js-sdk/1.1/ZohoEmbededAppSDK.min.js"></script>
+
+<script>
+
+</script>
+</head>
+  <body>
+ 
+<div id="app">
+          <v-app>            
+            <h2>This is zoho extension</h2> 
+           
+      <template>
+        <!-- <p>Message is: {{ i }}</p>  -->
+        <v-card style="margin:10px ">
+                 <v-row>
+                       <!-- <v-col col="-1"></v-col>     -->
+                      
+                       <span class="lbl_project" style="margin-left:130px"> Projects</span>
+                     <!-- Project Data -->
+                       <v-col col="5" id="Project_col" style="margin-left:50px ;margin-top:50px">
+                          
+                          <v-select v-for="i in projects"                 
+                          :items="i"                                            
+                          id="Project_sel"                 
+                          v-model="i"
+                          > 
+                                                         
+                        </v-select>  
+
+                        <v-select v-for="i in Cus_fields"                 
+                        :items="i"                                            
+                        id="Project_sel"                 
+                        v-model="i"
+                        
+                        > 
+                                                       
+                      </v-select>  
+                        
+                                       
+                    </v-col>
+                        <v-col > 
+                         
+                        </v-col>
+                        <span class="lbl_deal" style="margin-left:480px "> Deal</span>
+                        <!--Deal Data  -->
+                        <v-col col="5" id="Deal_col" style="margin-right:50px ;margin-top:50px">  
+                          <v-select v-for="i in Deal_name"                 
+                          :items="i"                                            
+                          id="Project_sel"                 
+                          v-model="i"
+                          
+                          >                          
+                        </v-select> 
+                        <!-- v-for="i in S_Date1" -->
+                        <v-select                        
+                        label="Select"                 
+                        :items="S_Date1"                                            
+                        id="Project_sel"                 
+                        v-model="d_date1"
+                        >                          
+                      </v-select> 
+                      <!-- v-for="i in E_Date1" -->
+                      <v-select 
+                      label="Select"                 
+                      :items="E_Date1"                                            
+                      id="Project_sel" 
+                      v-model="d_date2"                
+                     
+                      >                          
+                   </v-select> 
+                   <!-- v-for="i in D_Date1" -->
+                   <v-select 
+                   label="Select"                 
+                   :items="D_Date1"                                            
+                   id="Project_sel"                 
+                   v-model="dis"  
+                   >                          
+                </v-select> 
+                <v-select 
+                label="Select"                 
+                :items="Cu_Date1"                                            
+                id="Project_sel"                 
+                v-model="Currency"
+                >                          
+             </v-select> 
+
+             <!-- Custom fields select boxes -->
+             <div v-for="i in Cus_fields">
+                       <v-select 
+                          v-model="Custom_fields[i]"                         
+                          label="Select"
+                          id="deal_sel"
+                          :items="articles"                                        
+                            >                           
+                        </v-select> 
+                      </div>  
+             <!-- end  Custom fields select boxes -->
+
+                                        
+                          <!-- <v-select v-for="i in articles"
+                          v-model="selected[i]"                         
+                          label="Select"
+                          id="deal_sel"
+                          :items="articles"                                        
+                            > 
+                           
+                        </v-select>   -->
+                     </v-col>
+                        <!-- <v-col col="-1">@click="sub()"</v-col> -->
+                      </v-row> 
+                      <v-btn id="btn_setup"
+                        @click="set()">
+                        SetUp
+                      </v-btn>
+                     
+                      <span v-for='i in articles'> {{ selected[i] }} 
+                      
+                      </span>
+                     
+                      <!-- <span>Selected: {{ selected[articles[i]] }}</span>   -->
+                    </v-card> 
+                                
+      </template>          
+                   
+         
+          </v-app>
+
+         
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js" integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+
+<script>
+  new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+       data(){
+          return{
+              ovn:"hello",            
+             // select: [],
+             
+              projects:[
+              { text: 'Project Title', value: 'Project Title' },
+              { text: 'Start Date', value: 'Start Date' },
+              { text: 'End Date', value: 'End Date' },
+              { text: 'Description', value: 'Description' },
+              { text: 'Currency', value: 'Currency' },
+              
+              ],
+             
+              i:'',
+              d_date1:'',
+              d_date2:'',
+              dis:'',
+              Currency:'',
+              Custom_fields:'',
+              integration_field:'',
+
+              articles: [],
+              Cus_fields:[],              
+              S_Date1:[],
+              E_Date1:[],
+              D_Date1:[],
+              Cu_Date1:[],
+              Deal_name: [
+              { text: 'Deal Name', value: 'Deal Name' },
+              ],
+             
+              selected: [],
+            //  Custom_fields:[],
+              cdc2:[],
+            
+             
+          }
+       },
+     
+       methods:{
+        set(){
+           var All_Deal_fields =[];
+           var All_cus_fields =[];
+           var fff = [];
+           console.log(fff.push(this.i))
+           console.log("fghjk",fff);
+           var ST_date=this.d_date1;
+           var ED_date=this.d_date2;  
+           var Disc=this.dis;
+           var Curr=this.Currency;
+           var Custom = this.Custom_fields
+          // All_cus_fields.push(this.Custom_fields)
+           //console.log("Custom",Custom)
+           
+           
+           All_Deal_fields.push("Deal Name");          
+           All_Deal_fields.push(ST_date);
+           All_Deal_fields.push(ED_date);
+           All_Deal_fields.push(Disc);
+           All_Deal_fields.push(Curr);
+           All_cus_fields.push(Custom);
+ 
+        var All_Project_fields =[];
+        var par = ["Project Title", "Start Date", "End Date", "Description", "Currency"];
+        All_Project_fields.push(par);
+
+
+       
+        console.log("All_Project_fields ",All_Project_fields);  
+        console.log("All_Deal_fields ",All_Deal_fields);
+        console.log("All_Deal_fields ",All_cus_fields);
+       
+      
+   //    Zoho crm function execute    //
+       var func_name = "zohocrmtesting1__deal_to_project";
+       var req_data ={
+       "arguments": JSON.stringify({
+        "P_Array" : All_Project_fields,
+        "D_Array" : All_Deal_fields
+          })
+       };
+      ZOHO.CRM.FUNCTIONS.execute(func_name, req_data)
+      .then(function(data){        
+         console.log("Final_data",data)
+       })
+
+  //    Zoho crm function execute    //
+
+  // variable //
+  zoho.crm.getOrgVariable("Deal_Project").then(function(responce){
+    console.log("responce",responce);
+  })
+
+  // end variable //
+
+
+        },
+        fun(){   
+          
+          var Project_fields= []; 
+          var S_Date=[];
+          var E_Date=[];
+          var D_Date=[];
+          var Cu_Date=[];
+          var All_Deal_fields=[];
+          var Portal_Id1=[];
+          var cus_array=[];
+          var cdc1=[];
+          console.log("cdc1",cdc1);
+          console.log("All_Deal_fields",All_Deal_fields);
+          console.log("Portal_Id",Portal_Id1);
+          console.log("cus_array",cus_array);
+          Util={};
+          var portalidvalue;
+          var projectidvalue;
+          //console.log("projectsprojects",projects);
+          ZOHO.embeddedApp.on("PageLoad",function(data){
+            //console.log("")
+          //we can write any api or code in the under function embeddedApp.on----- because that represent to display in crm
+          
+          var id=data.EntityId, module = data.Entity;
+          ZOHO.CRM.API.getRecord({Entity: module, RecordId: id}).then(function(data){
+          //console.log("Get record from testing extension lead",data);
+             });
+          
+          ZOHO.CRM.META.getFields({"Entity":"Deals"}).then(function(data){
+            //ZOHO.CRM.META.getFields({"Entity":"Contacts"}).then(function(data){
+            Data = JSON.stringify(data);
+            var field = data.fields;
+            //console.log("filed ",field);
+          
+            //new for loop for push data all to the v-selelct box
+            for (const i in field) {
+              var Api_Data = field[i].data_type;
+             // console.log("Data_types",Api_Data);
+              var Api_field_label= field[i].field_label;            
+             var container1=document.getElementById("Project_sel");
+              if(Api_Data != "profileimage" && Api_Data != "ownerlookup" && Api_Data != "lookup"){     
+         
+                while (Api_field_label){       
+                  if(Api_field_label != "Modified Time"  && Api_field_label != "Created Time"  && Api_field_label != "Last Activity Time" && Api_field_label != "Sales Cycle Duration" && Api_field_label != "Lead Conversion Time" && Api_field_label != "Overall Sales Duration" && Api_field_label != "Probability (%)" && Api_field_label != "Next Step" && Api_field_label != "Stage" && Api_field_label != "Deal Name"){        
+                    Project_fields.push(Api_field_label);  
+                    console.log("X",Api_field_label);
+                    if(Api_Data == "date"){            
+                     c_date = Api_field_label;
+                      S_Date.push("None"); 
+                      E_Date.push("None");  
+                      S_Date.push(c_date)
+                      E_Date.push(c_date)
+                      console.log("Hey Ganesh");
+                    } 
+                    if(Api_Data == "textarea"){   
+                      D_date = Api_field_label;
+                      D_Date.push("None");
+                      D_Date.push(D_date);
+                     
+                    }
+                    if (Api_Data == "currency")
+                    {
+                        Cu_date = Api_field_label;
+                        Cu_Date.push("None");
+                        Cu_Date.push(Cu_date)
+                    }
+
+                  }
+                    break;
+               }  
+               
+            }
+            }
+            // new for loop ended
+       
+          });
+          
+          
+          //Connector api zoho crm to project
+          var data1 = {
+          
+          }
+          
+          //Invoking the connector API to get portals of the user and populate them in a select list
+          ZOHO.CRM.CONNECTOR.invokeAPI("zohocrmtesting1.sampleprojects.getportals",data1).then(function(dataa){
+          response = dataa.response;
+          responsejson=JSON.parse(response);
+          portal=responsejson.portals;
+         // console.log("portal",portal);
+          PortalJSON=JSON.stringify(portal);
+         // console.log("PortalJSON",PortalJSON);
+          for (i = 0; i < portal.length; i++) 
+          {
+          portalid=portal[i].id_string;
+          //console.log("portalid",portalid);
+         // Portal_Id1.push(portalid);
+          }
+          
+          })
+           var data = {
+          
+          }
+         
+          ZOHO.CRM.CONNECTOR.invokeAPI("zohocrmtesting1.sampleprojects.customfields",data).then(function(dataa){
+            // console.log("ganeshtadi01@lksadf");
+             // console.log("dataa",dataa);
+             response = dataa.response;
+            // console.log("custom_field response",response)
+             responsejson=JSON.parse(response);
+             custom_field=responsejson.project_custom_fields;
+             console.log("custom_field",custom_field);
+            
+             for (i = 0; i < custom_field.length; i++) 
+            {
+                Custom_f_name=custom_field[i].field_name;
+                Custom_f_type=custom_field[i].field_type;
+                //console.log("T",Custom_f_type);
+                //console.log("N",Custom_f_name);               
+                cus_array.push(Custom_f_name);  
+             
+                /*  console.log("Api_field_labelkjksjdhkjhshdishidjfhjsdkfjskjfhjds",Api_field_label);
+                  if(Custom_f_type == "integration_field"){
+                    console.log('DD',Api_field_label)   
+                    cdc = Api_field_label;
+                    console.log("cdc",cdc);
+                    cdc1.push("None");
+                    cdc1.push(cdc);
+                  
+                  }  */
+                  
+                
+
+            
+            }
+             
+             })
+             
+
+                  
+          
+         
+          //Connector api zoho crm to project
+          
+       
+          
+
+          
+           //end custom field api for get 
+
+          
+              
+          // clode the function embeddedApp.on----
+          
+          //  Project portaLId getting  //
+
+           //  Project portaLId getting  //
+          
+             });
+          
+          
+          console.log("selected_item123",Project_fields);
+          
+          
+          this.articles=Project_fields;
+         
+          this.S_Date1=S_Date;          
+          this.E_Date1=E_Date;
+          this.D_Date1=D_Date;
+          this.Cu_Date1=Cu_Date; 
+          this.Cus_fields=cus_array;
+        //  this.cdc2=cdc1;
+
+  ZOHO.embeddedApp.init();
+        
+          
+          
+            },
+
+  mfunction(){
+ZOHO.embeddedApp.on("PageLoad",function(data)
+{
+
+  var data1 = {
+          
+  }
+  
+  //Invoking the connector API to get portals of the user and populate them in a select list
+  ZOHO.CRM.CONNECTOR.invokeAPI("zohocrmtesting1.sampleprojects.getportals",data1).then(function(dataa){
+ // console.log("ganeshtadi01@lksadf");
+  // console.log("dataa",dataa);
+  response = dataa.response;
+  responsejson=JSON.parse(response);
+  portal=responsejson.portals;
+  console.log("portal",portal);
+  PortalJSON=JSON.stringify(portal);
+  console,log("PortalJSON",PortalJSON)
+  
+  })
+
+ 
+
+});
+ZOHO.embeddedApp.init();
+        },
+ 
+ 
+       
+      
+  onChange: function(e){
+        var id = e.target.value;
+        var name = e.target.options[e.target.options.selectedIndex].text;
+        console.log('id ',id );
+        console.log('name ',name );
+    },
+
+        
+    sub(){        
+         console.log("sss",this.Amount);
+         console.log("ss",this.selected[i]);
+        },
+
+      },
+     created: function(){
+       this.fun()
+        },
+     
+
+    })
+
+</script>
+
+  </body>
+</html>
